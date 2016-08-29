@@ -3,5 +3,126 @@
 \begin{bibdiv}
 \begin{biblist}
 
+\bib{ChoEtal17a}{misc}{
+      author={Choi, S.-C.~T.},
+      author={Ding, Y.},
+      author={\HickernellFJ, F.~J.},
+      author={Tong, X.},
+       title={Local adaption for approximation and minimization of univariate
+  functions},
+         how={arXiv:1606.02766 [math.NA]},
+        date={2016+},
+        note={under revision},
+}
+
+\bib{HicEtal14b}{article}{
+      author={Clancy, N.},
+      author={Ding, Y.},
+      author={Hamilton, C.},
+      author={\HickernellFJ, F.~J.},
+      author={Zhang, Y.},
+       title={The cost of deterministic, adaptive, automatic algorithms: Cones,
+  not balls},
+        date={2014},
+     journal={J. Complexity},
+      volume={30},
+       pages={21\ndash 45},
+}
+
+\bib{Din15a}{thesis}{
+      author={Ding, Y.},
+       title={Guaranteed adaptive univariate function approximation},
+        type={Ph.D. Thesis},
+        date={2015},
+}
+
+\bib{HicEtal14a}{inproceedings}{
+      author={\HickernellFJ, F.~J.},
+      author={Jiang, L.},
+      author={Liu, Y.},
+      author={Owen, A.~B.},
+       title={Guaranteed conservative fixed width confidence intervals via
+  {M}onte {C}arlo sampling},
+        date={2013},
+   booktitle={{M}onte {C}arlo and quasi-{M}onte {C}arlo methods 2012},
+      editor={Dick, J.},
+      editor={Kuo, F.~Y.},
+      editor={Peters, G.~W.},
+      editor={Sloan, I.~H.},
+      series={Springer Proceedings in Mathematics and Statistics},
+      volume={65},
+   publisher={Springer-Verlag, Berlin},
+       pages={105\ndash 128},
+}
+
+\bib{Jia16a}{thesis}{
+      author={Jiang, L.},
+       title={Guaranteed adaptive {M}onte {C}arlo methods for estimating means
+  of random variables},
+        type={Ph.D. Thesis},
+        date={2016},
+}
+
+\bib{Nov96a}{article}{
+      author={Novak, E.},
+       title={On the power of adaption},
+        date={1996},
+     journal={J. Complexity},
+      volume={12},
+       pages={199\ndash 237},
+}
+
+\bib{PlaEtal08a}{article}{
+      author={Plaskota, L.},
+      author={Wasilkowski, G.~W.},
+      author={Zhao, Y.},
+       title={The power of adaption for approximating functions with
+  singularities},
+        date={2008},
+     journal={Math. Comput.},
+      volume={77},
+       pages={2309\ndash 2338},
+}
+
+\bib{Rum99a}{incollection}{
+      author={Rump, S.~M.},
+       title={{INTLAB - INTerval LABoratory}},
+        date={1999},
+   booktitle={{Developments~in~Reliable Computing}},
+      editor={Csendes, Tibor},
+   publisher={Kluwer Academic Publishers},
+     address={Dordrecht},
+       pages={77\ndash 104},
+        note={\url{http://www.ti3.tuhh.de/rump/}},
+}
+
+\bib{Rum10a}{article}{
+      author={Rump, S.~M.},
+       title={Verification methods: {R}igorous results using floating-point
+  arithmetic},
+        date={2010},
+     journal={Acta Numer.},
+      volume={19},
+       pages={287\ndash 449},
+}
+
+\bib{Ton14a}{thesis}{
+      author={Tong, X.},
+       title={A guaranteed, adaptive, automatic algorithm for univariate
+  function minimization},
+        type={Master's Thesis},
+        date={2014},
+}
+
+\bib{TraWasWoz88}{book}{
+      author={Traub, J.~F.},
+      author={Wasilkowski, G.~W.},
+      author={Wo\'zniakowski, H.},
+       title={Information-based complexity},
+   publisher={Academic Press},
+     address={Boston},
+        date={1988},
+}
+
 \end{biblist}
 \end{bibdiv}

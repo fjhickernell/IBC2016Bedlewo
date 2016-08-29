@@ -130,7 +130,7 @@
 
 \section{Problem}
 
-\begin{frame}[fragile]
+\begin{frame}<1>[label = Goal, fragile]
 	\frametitle{\only<1>{Done Already}\only<2>{Goal}}
 	\northeaststuff{3.7}{2.2}{\includegraphics[width=7cm]{ProgramsImages/LinearSpline.eps}}
 	
@@ -143,10 +143,10 @@ Given
 		\item \alert{function}, $f:[a,b] \to \reals$, 
 		\item \alert{error tolerance}, $\varepsilon$, and 
 		\item<only@1> \alert{ball} $\cb = \{f \in \cw^{2,\infty}: \norm{f''} \le \sigma \}$ of radius $\sigma$
-		\item<only@2> \alert{cone} $\cc \subset \cw^{2,\infty}$ defined by constants $n_{\init}$ and $\fC_0$
+		\item<only@2> nonconvex \alert{cone} $\cc \subset \cw^{2,\infty}$ defined by constants $n_{\init}$ and $\fC_0$
 	\end{itemize}
 		\vspace{-3ex}
-	\only<1>{one may \alert{nonadaptively}}\only<2>{we \alert{adaptively}} construct a linear spline, $S(f,x_{0:n})$ with $a = x_0 <x_1 < \cdots < x_n = b$, satisfying
+	\only<1>{one may \alert{nonadaptively}}\only<2>{we \alert{adaptively}} construct a linear spline, $S(f,x_{0:n})$ with $a = x_0 <x_1 < \cdots < x_n = b$, satisfying \only<2>{\cite{ChoEtal17a}}
 	\begin{gather*}
 	\norm{f - S(f,x_{0:n})} \overset{\text{\alert{always}}}{\le}  \max_{i=1:n}\frac{1}{8}(x_{i}-x_{i-1})^2\norm[{[x_{i-1},x_i]}]{f''} \overset{\text{\alert{goal}}}{\le} \varepsilon \quad \forall f \in \only<1>{\cb}\only<2>{\cc} \\
 	\only<1>{\sqrt{\frac{\sigma}{\varepsilon}} \asymp \comp(\varepsilon,\sigma,\cb) \le \cost(S,\varepsilon, \sigma, \cb) = n+1 \\[-1ex] \hspace{30ex} = \left \lceil (b-a)\sqrt{\frac{\sigma}{8\varepsilon}} \, \right \rceil + 1}
@@ -156,6 +156,32 @@ Given
 	
 	
 \end{frame}
+
+\begin{frame}
+	\frametitle{State of the Art}
+	
+	\vspace{-3ex}
+	
+	\begin{itemize}
+		\item Algorithms with \alert{theoretical justification} require bounds on the semi-norms of functions, which is usually impractical
+		
+		\item \alert{Chebfun} uses Chebyshev polynomials to approximate, integrate, optimize, etc.\ functions but with no sufficient conditions for success
+		
+		\item Successful optimization algorithms require the input function to be \alert{convex}
+		
+		\item Guaranteed algorithms exist based on \alert{interval arithmetic} \cites{Rum99a, Rum10a}, but we do not want to follow that model
+		
+		\item \alert{Adaption has no advantage} if the set of input functions is symmetric
+		and convex \cite[Theorem 1]{Nov96a}, \cite[Chapter 4, Theorem
+		5.2.1]{TraWasWoz88}
+		
+    	\item \ocite{PlaEtal08a} have approximation algorithms for functions with \alert{singularities}
+		
+		
+	\end{itemize}
+\end{frame}
+
+\againframe<2>{Goal}
 
 \begin{frame}
 	\frametitle{Bounding $\norm[{[\alpha,\gamma]}]{f''}$}
@@ -281,7 +307,7 @@ We will construct our \alert{adaptive} spline algorithm for functions in
 	 	&= \left[\max(a,\xi -3\cdot 2^{-l} h_{\init}),  \min(b, \xi +2 \cdot 2^{-l} h_{\init})\right] \\
 h_{\init}  &= \frac{b-a}{n_{\init}}, \qquad	\xi= a + \left\lceil\frac{(x-a)2^l}{h_{\init}}\right\rceil \frac{h_{\init}}{2^l}, \ l \in \mathbb{N}_0, \ x \in [a,b) \\
 	\MoveEqLeft{\cost(S,f,\varepsilon,\cc)} \\
-	&\le \frac{n_{\init}}{b-a}\int_a^b \min\left\{2^l:  2^l \ge \sqrt{\frac{\fC\left(2\cdot 2^{-l} h_{\init}\right) h_{\init}^2 \norm[\bar{I}_{x,l}]{f''} }{8 \abstol}}, \right .\\
+	&\le \frac{n_{\init}}{b-a}\int_a^b \min\left\{2^l:  2^l \ge \sqrt{\frac{\fC\left(3\cdot 2^{-l} h_{\init}\right) h_{\init}^2 \norm[\bar{I}_{x,l}]{f''} }{8 \abstol}}, \right .\\
 	&\hspace{20ex}\left .  l \in  \natzero\right\} \, \dif x + 1 \approx \sqrt{\frac{\fC(0) \norm[\frac 12]{f''}}{8\abstol}} +1 
 	\end{align*}
 	\begin{equation*}
@@ -291,7 +317,7 @@ h_{\init}  &= \frac{b-a}{n_{\init}}, \qquad	\xi= a + \left\lceil\frac{(x-a)2^l}{
 
 \section{Function Minimization}
 \begin{frame}
-	\frametitle{Globally Minimizaiton of a Function}
+	\frametitle{Global Minimization of a Function}
 		\vspace{-4ex}
 		
 		Given 
@@ -319,15 +345,19 @@ h_{\init}  &= \frac{b-a}{n_{\init}}, \qquad	\xi= a + \left\lceil\frac{(x-a)2^l}{
 		
 \end{frame}
 
-\section{Discussion}
-\begin{frame}
-	\frametitle{Highlights }
+\section{Take Home}
+\begin{frame}[allowframebreaks]
+	\frametitle{Take Home Points }
 \begin{itemize}
-	\item Constructed \alert{locally} (sampling density is non-uniform) adaptive algorithms for function approximation and minimization
+	\item Constructed \alert{locally} (non-uniform sampling density) adaptive algorithms for function approximation and minimization, different from our earlier adaptive algorithms \cite{HicEtal14b}
 	
-	\item Algorithms are successful for \alert{cones} of input functions
+	\item Algorithms are successful for \alert{cones} of input functions, which continues the theme of \cites{HicEtal14a,HicEtal14b,Ton14a,Din15a,Jia16a}
 	
-	\item 
+	\item Computational cost of our function approximation algorithm is $\asymp \sqrt{\norm[\alert{\frac12}]{f''}/\varepsilon}$, the same as the computational complexity of the problem
+	
+	\item Need \alert{higher order} algorithms---would they have a computational cost $\asymp \left(\norm[\frac1r]{f^{(r)}}/\varepsilon\right)^{1/r}$?
+	
+	\item Local adaption may be practical for \alert{multidimensional} problems with lower dimension, but would they work in high dimension?
 	
 	\end{itemize}
 	
