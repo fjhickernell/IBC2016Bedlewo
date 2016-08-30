@@ -230,10 +230,10 @@ We will construct our \alert{adaptive} spline algorithm for functions in
 	
 	\vspace{-5.5ex}	
 		\begin{gather*}
-		\cc =  \Bigl\{f : \norm[{[\alpha,\gamma]}]{f''} \le \max \bigl (B_{\pm}(f'',\alpha,\gamma)  \bigr), \ \gamma - \alpha \le h_{\pm} < \fh\Bigr\} \\[-1ex]
-		B_{-}(f'',\alpha,\gamma) = \begin{cases} \fC(h_{-}) \norm[{-\infty,[\gamma - h_-, \alpha]}]{f''}, & a \le \gamma - h_- \\
+		\cc =  \Bigl\{f : \norm[{[\alpha,\gamma]}]{f''} \le \max \bigl (B_{\pm}(f'',\alpha,\gamma,h_{\pm})  \bigr), \ \gamma - \alpha \le h_{\pm} < \fh\Bigr\} \\[-1ex]
+		B_{-}(f'',\alpha,\gamma,h_-) = \begin{cases} \fC(h_{-}) \norm[{-\infty,[\gamma - h_-, \alpha]}]{f''}, & a \le \gamma - h_- \\
 		0, & \text{otherwise} \end{cases} \\
-		B_{+}(f'',\alpha,\gamma) = \begin{cases} \fC(h_{+})\norm[{-\infty,[\gamma,\alpha + h_+ ]}]{f''}, & \alpha + h_+ \le b \\
+		B_{+}(f'',\alpha,\gamma,h_+) = \begin{cases} \fC(h_{+})\norm[{-\infty,[\gamma,\alpha + h_+ ]}]{f''}, & \alpha + h_+ \le b \\
 		0, & \text{otherwise} \end{cases} \\
 		\end{gather*}
 \end{frame}
@@ -268,7 +268,7 @@ We will construct our \alert{adaptive} spline algorithm for functions in
 
 \begin{frame}
 	\frametitle{Approximation Algorithm}
-	\northeaststuff{3.7}{3}{\includegraphics[width=7cm]{ProgramsImages/LinearSplineSecDeriv.eps}}
+	\northeaststuff{3.7}{3}{\includegraphics[width=7cm]{ProgramsImages/sampling-funappxg.eps}}
 	
 	\vspace{-8ex}
 	
@@ -307,11 +307,11 @@ We will construct our \alert{adaptive} spline algorithm for functions in
 	 	&= \left[\max(a,\xi -3\cdot 2^{-l} h_{\init}),  \min(b, \xi +2 \cdot 2^{-l} h_{\init})\right] \\
 h_{\init}  &= \frac{b-a}{n_{\init}}, \qquad	\xi= a + \left\lceil\frac{(x-a)2^l}{h_{\init}}\right\rceil \frac{h_{\init}}{2^l}, \ l \in \mathbb{N}_0, \ x \in [a,b) \\
 	\MoveEqLeft{\cost(S,f,\varepsilon,\cc)} \\
-	&\le \frac{n_{\init}}{b-a}\int_a^b \min\left\{2^l:  2^l \ge \sqrt{\frac{\fC\left(3\cdot 2^{-l} h_{\init}\right) h_{\init}^2 \norm[\bar{I}_{x,l}]{f''} }{8 \abstol}}, \right .\\
-	&\hspace{20ex}\left .  l \in  \natzero\right\} \, \dif x + 1 \approx \sqrt{\frac{\fC(0) \norm[\frac 12]{f''}}{8\abstol}} +1 
+	&\le \frac{n_{\init}}{b-a}\int_a^b \min\left\{2^l:  2^{2l} \ge \frac{\fC\left(3\cdot 2^{-l} h_{\init}\right) h_{\init}^2 \norm[\bar{I}_{x,l}]{f''} }{8 \abstol}, \right .\\
+	&\hspace{20ex}\left .  l \in  \natzero\right\} \, \dif x + 1 \approx \sqrt{\frac{\fC_0 \norm[\frac 12]{f''}}{8\abstol}} +1 
 	\end{align*}
 	\begin{equation*}
-	\comp(f,\varepsilon,\cc) \ge \sqrt{\frac{(\fC(0)-1)  \norm[\frac12]{f''} }{16(\fC(0)+1)\varepsilon}} -1
+	\comp(\varepsilon,f,\cc) \ge \sqrt{\frac{(\fC_0-1)  \norm[\frac12]{f''} }{16(\fC_0+1)\varepsilon}} -1
 	\end{equation*}
 \end{frame}
 
@@ -345,19 +345,25 @@ h_{\init}  &= \frac{b-a}{n_{\init}}, \qquad	\xi= a + \left\lceil\frac{(x-a)2^l}{
 		
 \end{frame}
 
+\begin{frame}
+	\frametitle{Global Minimization Example}
+\centerline{\includegraphics[width = 11.5cm]{ProgramsImages/sampling-funming.eps}}
+\end{frame}
+
+
 \section{Take Home}
-\begin{frame}[allowframebreaks]
+\begin{frame}
 	\frametitle{Take Home Points }
 \begin{itemize}
-	\item Constructed \alert{locally} (non-uniform sampling density) adaptive algorithms for function approximation and minimization, different from our earlier adaptive algorithms \cite{HicEtal14b}
+	\item Constructed \alert{locally} (non-uniform sampling density) adaptive algorithms for univariate function approximation and global minimization; both algorithms are implemented in GAIL
 	
-	\item Algorithms are successful for \alert{cones} of input functions, which continues the theme of \cites{HicEtal14a,HicEtal14b,Ton14a,Din15a,Jia16a}
+	\item Algorithms succeed for \alert{cones} of input functions, continuing the theme of \cites{HicEtal14a,HicEtal14b,Ton14a,Din15a,Jia16a}
 	
-	\item Computational cost of our function approximation algorithm is $\asymp \sqrt{\norm[\alert{\frac12}]{f''}/\varepsilon}$, the same as the computational complexity of the problem
+	\item Computational cost of our function approximation algorithm is $\asymp \sqrt{\norm[\alert{\frac12}]{f''}/\varepsilon}$, asymptotically the same as the computational complexity of the problem
 	
 	\item Need \alert{higher order} algorithms---would they have a computational cost $\asymp \left(\norm[\frac1r]{f^{(r)}}/\varepsilon\right)^{1/r}$?
 	
-	\item Local adaption may be practical for \alert{multidimensional} problems with lower dimension, but would they work in high dimension?
+	%\item Local adaption may be practical for \alert{multidimensional} problems with lower dimension, but would they work in high dimension?
 	
 	\end{itemize}
 	
