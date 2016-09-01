@@ -3,6 +3,22 @@
 \begin{bibdiv}
 \begin{biblist}
 
+\bib{ChoEtAl15a}{misc}{
+      author={Choi, S.-C.~T.},
+      author={Ding, Y.},
+      author={\HickernellFJ, F.~J.},
+      author={Jiang, L.},
+      author={{Jim\'enez Rugama}, {\relax Ll}.~A.},
+      author={Tong, X.},
+      author={Zhang, Y.},
+      author={Zhou, X.},
+       title={{GAIL}: {G}uaranteed {A}utomatic {I}ntegration {L}ibrary
+  (versions 1.0--2.1)},
+         how={MATLAB software},
+        date={{2013--2015}},
+         url={https://github.com/GailGithub/GAIL_Dev},
+}
+
 \bib{ChoEtal17a}{misc}{
       author={Choi, S.-C.~T.},
       author={Ding, Y.},
@@ -36,6 +52,14 @@
         date={2015},
 }
 
+\bib{TrefEtal16b}{manual}{
+      author={Hale, N.},
+      author={Trefethen, L.~N.},
+      author={Driscoll, T.~A.},
+       title={Chebfun version 5.5},
+        date={2016},
+}
+
 \bib{HicEtal14a}{inproceedings}{
       author={\HickernellFJ, F.~J.},
       author={Jiang, L.},
@@ -61,15 +85,6 @@
   of random variables},
         type={Ph.D. Thesis},
         date={2016},
-}
-
-\bib{Nov96a}{article}{
-      author={Novak, E.},
-       title={On the power of adaption},
-        date={1996},
-     journal={J. Complexity},
-      volume={12},
-       pages={199\ndash 237},
 }
 
 \bib{PlaEtal08a}{article}{
@@ -114,14 +129,13 @@
         date={2014},
 }
 
-\bib{TraWasWoz88}{book}{
-      author={Traub, J.~F.},
-      author={Wasilkowski, G.~W.},
-      author={Wo\'zniakowski, H.},
-       title={Information-based complexity},
-   publisher={Academic Press},
-     address={Boston},
-        date={1988},
+\bib{Woz88a}{article}{
+      author={Wo{\'{z}}niakowski, H.},
+       title={A survey of information-based complexity},
+        date={1985},
+     journal={J. Complexity},
+      volume={1},
+       pages={11\ndash 84},
 }
 
 \end{biblist}

@@ -33,13 +33,9 @@ fmax = max(fplot);
 ylabelval = fmin - 0.03;
 
 %% Plot function and spline
-hFig = figure;
-color = get(hFig,'Color');
-set(gca,'XColor',color,'YColor',color,'TickDir','out')
+gail.RemovePlotAxes
 h = plot(xplot,fplot,'color',MATLABBlue);
 axis([xmin xmax fmin fmax+0.3])
-set(gca,'Visible','off')
-hold on
 plot([xnodes; xnodes],[fmin*ones(size(xnodes)); fnodes],'--k')
 h = [h; plot(xxnodes,xfnodes,'color',MATLABGreen)];
 h = [h; plot(xnodes,fnodes,'.','color',MATLABOrange)];
@@ -55,13 +51,9 @@ print -depsc LinearSpline.eps
 %% Plot second derivative too
 fdd1 = diff(diff(fnodes(1:3))./diff(xnodes(1:3)))/diff(xnodes([1 3]));
 fdd2 = diff(diff(fnodes(4:6))./diff(xnodes(4:6)))/diff(xnodes([4 6]));
-hFig = figure;
-color = get(hFig,'Color');
-set(gca,'XColor',color,'YColor',color,'TickDir','out')
+gail.RemovePlotAxes
 plot(xplot,fplot,'color',MATLABBlue);
 axis([xmin xmax fmin fmax+0.3])
-set(gca,'Visible','off')
-hold on
 plot([xnodes; xnodes],[fmin*ones(size(xnodes)); fnodes],'--k')
 plot(xxnodes,xfnodes,'color',MATLABGreen);
 plot(xnodes,fnodes,'.','color',MATLABOrange);
@@ -73,6 +65,8 @@ h = [h; plot(xnodes([1 3]),abs(fppnodes(1))*ones(1,2), ...
    xnodes([4 6]),abs(fppnodes(6))*ones(1,2), ...
    'color',MATLABMaroon)];
 h = [h; plot(xnodes([3 4]),abs(fppnodes(3))*ones(1,2), ...
+   xnodes([1 3]),abs(fpp(0.5))*ones(1,2), ...
+   xnodes([4 6]),abs(fppnodes(4))*ones(1,2), ...
    'color',LtMaroon)];
 
 for ii = 1:nnodes
